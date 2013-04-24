@@ -1,0 +1,9 @@
+\contentsline {section}{\numberline {1}题目大意}{2}{section.1}
+\contentsline {section}{\numberline {2}基础知识}{2}{section.2}
+\contentsline {section}{\numberline {3}算法分析}{2}{section.3}
+\contentsline {section}{\numberline {4}$5\%$的算法}{2}{section.4}
+\contentsline {section}{\numberline {5}$15\%$的算法}{2}{section.5}
+\contentsline {section}{\numberline {6}$30\%$的算法}{2}{section.6}
+\contentsline {section}{\numberline {7}$40\%$的算法}{3}{section.7}
+\contentsline {section}{\numberline {8}$60\%$的算法}{3}{section.8}
+\contentsline {section}{\numberline {9}$100\%$的算法}{3}{section.9}

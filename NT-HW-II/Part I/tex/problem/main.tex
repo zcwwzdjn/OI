@@ -1,0 +1,40 @@
+\documentclass[a4paper]{article}
+\usepackage[slantfont, boldfont, CJKtextspaces, CJKmathspaces]{xeCJK}
+\usepackage{fontspec,xunicode,xltxtra}
+\usepackage[pagestyles]{titlesec}
+\usepackage{indentfirst}
+\usepackage[top=1in,bottom=1in,left=1.25in,right=1.25in]{geometry}
+\usepackage{amsmath}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[colorlinks,linkcolor=red,anchorcolor=Blue,citecolor=green]{hyperref}
+
+\setCJKmainfont[BoldFont={黑体}, ItalicFont={楷体_GB2312}]{宋体}
+\setmainfont{Liberation Serif} 
+\setsansfont{Liberation Sans} 
+\setmonofont{文泉驿等宽微米黑}
+
+\punctstyle{kaiming} % 开明式标点格式 
+
+\begin{document}
+
+\title{集训队互测题}
+\author{Wayne}
+\maketitle
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+题目名称 & 文件名 & 时间限制 & 内存限制 \\ \hline
+Maze & maze.*\{in,out,cpp,pas,c\} & 3s & 256MB \\ \hline
+Line & line.*\{in,out,cpp,pas,c\} & 5s & 256MB \\ \hline
+Book & book.*\{in,out,cpp,pas,c\} & 1s & 256MB \\ \hline
+\end{tabular}
+\vspace{15pt}
+\\ {\large\textbf{考试时间：4小时}}
+\end{center}
+\tableofcontents
+
+\include{maze}
+\include{line}
+\include{book}
+
+\end{document}

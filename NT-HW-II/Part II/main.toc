@@ -1,0 +1,16 @@
+\contentsline {section}{\numberline {1}引言}{2}
+\contentsline {section}{\numberline {2}容斥原理}{2}
+\contentsline {subsection}{\numberline {2.1}预备知识}{2}
+\contentsline {subsection}{\numberline {2.2}经典问题}{4}
+\contentsline {subsubsection}{\numberline {2.2.1}不定方程非负整数解计数}{4}
+\contentsline {subsubsection}{\numberline {2.2.2}错位排列计数}{5}
+\contentsline {subsection}{\numberline {2.3}例题解析}{6}
+\contentsline {subsubsection}{\numberline {2.3.1}HAOI2008\nobreakspace {}硬币购物}{6}
+\contentsline {subsubsection}{\numberline {2.3.2}原创题\nobreakspace {}游戏}{6}
+\contentsline {section}{\numberline {3}容斥原理的推广}{8}
+\contentsline {subsection}{\numberline {3.1}数论中的容斥原理}{8}
+\contentsline {subsection}{\numberline {3.2}概率论中的容斥原理}{10}
+\contentsline {section}{\numberline {4}容斥原理的一般化}{10}
+\contentsline {subsection}{\numberline {4.1}预备知识}{10}
+\contentsline {subsection}{\numberline {4.2}例题：有标号DAG计数}{11}
+\contentsline {section}{\numberline {5}总结}{13}

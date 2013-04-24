@@ -1,0 +1,88 @@
+\documentclass[a4paper]{article}
+\usepackage{ctex}
+%\usepackage[slantfont, boldfont, CJKtextspaces, CJKmathspaces]{xeCJK}
+\usepackage{fontspec,xunicode,xltxtra}
+\usepackage[pagestyles]{titlesec}
+\usepackage{indentfirst}
+\usepackage[top=1in,bottom=1in,left=1.25in,right=1.25in]{geometry}
+\usepackage{amsmath}
+%usepackage[usenames,dvipsnames]{color}
+\usepackage[colorlinks,linkcolor=red,anchorcolor=Blue,citecolor=green]{hyperref}
+
+%\setCJKmainfont[BoldFont={黑体}, ItalicFont={楷体_GB2312}]{宋体}
+\setmainfont{Liberation Serif} 
+\setsansfont{Liberation Sans} 
+\setmonofont{文泉驿等宽微米黑}
+
+%\punctstyle{kaiming} % 开明式标点格式 
+\renewcommand{\today}{}
+
+\begin{document}
+
+\title{Book解题报告}
+\author{成都七中\ \  王迪}
+\maketitle
+\tableofcontents
+
+\newpage
+
+\section{题目大意}
+构造一个长度为$N$的整数数列$\{S_N\}$，满足：
+\begin{itemize}
+\item $S_1 = X$；
+\item 对于$1 < i \le N$，$S_i - S_{i-1}$要么为$+A$，要么为$-B$，其中$A,B$均为正整数；
+\item $\sum_{1 \le i \le N}{S_i} = M$。
+\end{itemize}
+\par
+对于$40\%$的数据，$N \le 100$，$A,B \le 5$； \par
+对于$60\%$的数据，$N \le 1000$； \par
+对于$100\%$的数据，$N \le 10^5$。 \par
+数据保证有解。
+
+\section{算法分析}
+由于题目只要求构造一个可行解，所以很容易直接想到各种各样的贪心算法，但我所知的一些贪心算法都是不正确的，而盲目的贪心也不能帮助我们认清题目的本质。 \par
+所以我们考虑用数学语言来刻画这个问题： \par
+令$D_i = S_{i + 1} - S_i$，其中$1 \le i < N$，那么要么$D_i = A$，要么$D_i = -B$。 \par
+则$S_i = X + \sum_{1 \le j < i}{D_j}$。我们尝试用$D_i$表示$M$：
+\[
+M = \sum_{1 \le i \le N}(X + \sum_{1 \le j < i}{D_j})
+\]
+\par
+令$T = M - N \cdot X$，我们考虑上式每一个$D_i$出现的次数，则有：
+\[
+T = \sum_{1 \le i < N}{D_i \times (N - i)}
+\]
+\par
+此时，我们发现问题是把$1$到$N-1$的整数分成两个集合，一个集合中数之和乘以$A$，另一个集合中数之和乘以$B$，而这两个值的差为$T$。 \par
+我们已经可以给出一些可以获得部分分的动态规划算法。 \par
+因为对$1$到$N-1$的每个整数有两个选择，我们考虑进行“降维”操作，即通过一些假设增加我们的已知量。 \par
+对所有$1 \le i < N$令$D_i = +A$，计$Q = A \cdot \sum_{1 \le i < N}(N - i) = A \cdot \frac{N(N - 1)}{2}$。 \par
+考虑$Q$和$T$的差值，而对于$D_i$若改变它为$-B$则这个差值将减少$(A+B)(N-i)$。 \par
+因为数据保证有解，故$Q-T$必为$(A+B)$的倍数，且记$P=\frac{Q-T}{A+B}$，有$0 \le P \le \frac{N(N - 1)}{2}$。 \par
+于是问题变成了一个经典问题：从$1$到$N-1$中选择一些数，使得和为$P$。 \par
+现在就可以比较轻松地设计算法了。
+
+\section{$40\%$的算法}
+因为$N \le 100$，而$P = O(N^2)$，所以我们可以设计一个动态规划算法。 \par
+记$dp[i][j]$表示用$1$到$i$的数能否得到选一些和为$j$，则有$dp[i][j] = dp[i - 1][j]\ or\ dp[i - 1][j - i]$。 \par
+时间复杂度$O(N^3)$，期望得分$40$分。
+
+\section{$60\%$的算法}
+直接的动态规划显然没有利用题目的特殊性：可用的数字是从$1$到$N-1$，具有连续性！ \par
+容易设计出一个贪心的算法：每次从未选数中选择最大的一个不超过$P$的数，添加进方案中，然后迭代进行下去。 \par
+这个结论其实是显然的：
+\begin{itemize}
+\item 若$P \le N - 1$，则可以直接构造出；
+\item 若$P \ge N$，则我们的过程可以这样表示：$P=(N-1)+(N-2)+\cdots+(N-k)+R$。
+\begin{itemize}
+\item 若$R < N - k$，则可以直接构造；
+\item 否则，可以把$(N - K - 1)$添加进方案，然后迭代下去。因为$P \le \frac{N(N-1)}{2}$，所以一定是可以构造出来的。
+\end{itemize}
+\end{itemize}
+\par
+所以简单的两重循环，每次找到可用的最大数即可，时间复杂度$O(N^2)$，期望得分$60$分。
+
+\section{$100\%$的算法}
+由上面的分析可以发现，我们构造出的方案一定是从$N-1$开始递减连续的一段，再加上一个单独的值，所以完全可以$O(N)$实现。期望得分$100$分。
+
+\end{document}

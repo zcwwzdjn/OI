@@ -1,0 +1,43 @@
+\documentclass{noithesis}
+
+\begin{document}
+
+首先求一个大小为$n$的无向联通图中，边数为偶数的方案数减去边数为奇数的方案数的值。设边数为偶数的方案数为$f(n)$，边数奇数的方案数为$g(n)$，那么对于$n>1$，可以写出递推式：
+\begin{eqnarray*}
+f(n) & = & 2^{C_n^2-1} - \sum_{i=1}^{n-2} (f(i) + g(i)) \times 2^{C_{n-i}^2-1} \times C_{n-1}^{i-1} - f(n-1) \times C_{n-1}^{n-2} \\
+g(n) & = & 2^{C_n^2-1} - \sum_{i=1}^{n-2} (f(i) + g(i)) \times 2^{C_{n-i}^2-1} \times C_{n-1}^{i-1} - g(n-1) \times C_{n-1}^{n-2}
+\end{eqnarray*}
+两式相减有
+\begin{eqnarray*}
+f(n) - g(n) & = & -(n-1)(f(n-1)-g(n-1))
+\end{eqnarray*}
+又因为$f(1)-g(1)=1$，所以$f(n)-g(n)=(-1)^{n-1}(n-1)!$。\par
+然后再来考虑题目所表明的表达式。令$rank(S)$表示$S$形成的联通块个数。
+\begin{eqnarray*}
+ans = \sum_{S} (-1)^{|S|} m^{rank(S)}
+\end{eqnarray*}
+考虑枚举$rank(S)$，重写答案表达式
+\begin{eqnarray*}
+ans = \sum_{k=1}^n m^{k} \sum_{rank(S)=k} (-1)^{|S|}
+\end{eqnarray*}
+重点在于求$\sum_{rank(S)=k} (-1)^{|S|}$，记为$cnt_k$。我们换一个思路考虑，
+若有两个联通块，一个大小为$a$一个大小为$b$，那么两者合起来的$f-g$方案数就是
+\[
+f(a)f(b)+g(a)g(b)-f(a)g(b)-f(b)g(a)=(f(a)-g(a))(f(b)-g(b))
+\]
+即，是可以乘起来的！而且这个可以推广到任意多个联通块。于是有
+\[
+cnt_k = \sum_{s_1+s_2+\cdots+s_k=n} (-1)^{n-k} \prod_{i=1}^k (s_i-1)!
+\]
+我们发现，这其实是第一类Stirling数，所以
+\[
+cnt_k = s(n, k)
+\]
+于是可以代回去化简答案表达式
+\begin{eqnarray*}
+ans & = & \sum_{k=1}^n m^k \sum_{rank(S)=k} (-1)^{|S|} \\
+    & = & \sum_{k=1}^n m^k s(n, k) \\
+	& = & (m)_n \\
+	& = & \prod_{i=1}^n (m-i+1)
+\end{eqnarray*}
+\end{document}
