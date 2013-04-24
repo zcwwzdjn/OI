@@ -265,7 +265,6 @@ void Calc() {
 }
 
 int main() {
-	freopen("t.in", "r", stdin);
 	scanf("%d", &n);
 	for (int i = 0; i < n; ++ i) scanf("%d%d", &poly[i].x, &poly[i].y);
 	for (int i = 0; i < 2; ++ i) scanf("%d%d", &pnt[i].x, &pnt[i].y);
